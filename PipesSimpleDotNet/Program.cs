@@ -8,7 +8,7 @@ namespace PipesSimpleDotNet
         static void Main(string[] args)
         {
             // The pipe.
-            using NamedPipeServerStream server = new NamedPipeServerStream("test_pipe_yay", PipeDirection.InOut, 
+            using NamedPipeServerStream server = new NamedPipeServerStream("rsx_mems_pipe", PipeDirection.InOut, 
                     1, PipeTransmissionMode.Byte);
 
             Console.WriteLine("====C#====");

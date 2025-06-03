@@ -17,7 +17,7 @@ typedef const wchar_t* win_string;
 int main()
 {
     std::cout << "====C++====\r\n";
-    win_string name = TEXT("\\\\.\\pipe\\test_pipe_yay");
+    win_string name = TEXT("\\\\.\\pipe\\rsx_mems_pipe");
 
     // Try to access pipe
     fileHandle = CreateFile(name, GENERIC_READ | GENERIC_WRITE,
@@ -59,6 +59,11 @@ int main()
             WriteFile(fileHandle, msg, strlen(msg), nullptr, NULL);
             std::cout << "send>> " << msg << "\r\n";
             angle++;
+        }
+        else if (std::string(buffer).rfind("SERVER ERROR NOT", 0) == 0)
+        {
+            // We have an error.
+            std::cout << "We have a server error.";
         }
 
         Sleep(500);
