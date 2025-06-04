@@ -32,7 +32,7 @@ int main()
         Sleep(100);
     }
 
-    int angle = 10;
+    double angle = -15;
 
     // Update loop
     while (1)
@@ -51,9 +51,7 @@ int main()
             std::string str = std::string("Angle: ").append(std::to_string(angle)).append("\r\n");
             const char* msg = str.c_str();
 
-            // Simulate taking time to do some work first
-            // and making the C# wait.
-            Sleep(5000);
+            // DO SOME WORK HERE
 
             // Send data to C#
             WriteFile(fileHandle, msg, strlen(msg), nullptr, NULL);
@@ -64,6 +62,14 @@ int main()
         {
             // We have an error.
             std::cout << "We have a server error.";
+        }
+        else if (std::string(buffer).rfind("Set to ", 0) == 0)
+        {
+            // The angle returned is the actual angle.
+            std::string actualAngleString = std::string(buffer).substr(7);
+            double actualAngle = std::stod(actualAngleString); // https://stackoverflow.com/a/30809670
+
+            // Do something with actualAngle
         }
 
         Sleep(500);
